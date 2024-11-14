@@ -1689,10 +1689,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1861218945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42859fc1bce74e347aee66320877d8cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 248d1d4a7f548094a9f3af817fa2267d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  ball: {fileID: 578307510}
 --- !u!1 &1929276045
 GameObject:
   m_ObjectHideFlags: 0

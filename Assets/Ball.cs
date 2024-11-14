@@ -36,14 +36,14 @@ public class Ball : MonoBehaviour
         {
             GameManager.Instance.Paddle2Scored();
 
-            Launch();
+            //Launch();
         }
 
         if (collision.gameObject.CompareTag("Goal_2"))
         {
             GameManager.Instance.Paddle1Scored();
 
-            Launch();
+            // Launch();
         }
     }
 }
