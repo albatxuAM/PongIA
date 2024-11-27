@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private int paddle1Score;
     private int paddle2Score;
 
+    private bool isballInArea1 = false;
+
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -44,5 +46,20 @@ public class GameManager : MonoBehaviour
         paddle1Transform.position = new Vector2(paddle1Transform.position.x, 0);
         paddle2Transform.position = new Vector2(paddle2Transform.position.x, 0);
         ballTransform.position = new Vector2(0, 0);
+    }
+
+    internal bool IsballInArea1()
+    {
+        return isballInArea1;
+    }
+
+    internal void setIsballInArea1(bool hasCrossedMiddle)
+    {
+        isballInArea1 = hasCrossedMiddle;
+    }
+
+    internal void MiddleCrossed()
+    {
+        setIsballInArea1(!isballInArea1);
     }
 }

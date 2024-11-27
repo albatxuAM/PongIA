@@ -18,6 +18,9 @@ public class Ball : MonoBehaviour
     {
         float xVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
         float yVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
+        Debug.Log(xVelocity);
+
+        GameManager.Instance.setIsballInArea1(xVelocity > 0);
 
         ballRb.velocity = new Vector2(xVelocity, yVelocity) * initialVelocity;
     }
@@ -44,6 +47,11 @@ public class Ball : MonoBehaviour
             GameManager.Instance.Paddle1Scored();
 
             // Launch();
+        }
+
+        if (collision.gameObject.CompareTag("Middle"))
+        {
+            GameManager.Instance.MiddleCrossed();
         }
     }
 }
