@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
         Launch();
     }
 
-    private void Launch()
+    public void Launch()
     {
         // Genera direcciones aleatorias para X y Y
         float xVelocity = Random.Range(0, 2) == 0 ? 1 : -1;
@@ -59,6 +59,36 @@ public class Ball : MonoBehaviour
                 float exponentialFactor = Mathf.Pow(1 + velocityMultiplier, Time.deltaTime);
                 ballRb.velocity = ballRb.velocity.normalized * speed * exponentialFactor;
                 break;
+        }
+
+        // Check if the ball is out of bounds
+        CheckOutOfBounds();
+    }
+
+    private void CheckOutOfBounds()
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null) return;
+
+        // Obtener los límites de la pantalla
+        Vector3 screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+
+        // Verificar si la bola está fuera de los límites
+        if (transform.position.x > screenBounds.x || transform.position.x < -screenBounds.x ||
+            transform.position.y > screenBounds.y || transform.position.y < -screenBounds.y)
+        {
+            // Determinar quién puntúa
+            if (transform.position.x > 0)
+            {
+                GameManager.Instance.Paddle1Scored();
+            }
+            else
+            {
+                GameManager.Instance.Paddle2Scored();
+            }
+
+            // Reiniciar el juego
+            GameManager.Instance.Restart();
         }
     }
 

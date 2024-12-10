@@ -43,9 +43,29 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        // Reinicia las posiciones de los paddles y la bola
         paddle1Transform.position = new Vector2(paddle1Transform.position.x, 0);
         paddle2Transform.position = new Vector2(paddle2Transform.position.x, 0);
         ballTransform.position = new Vector2(0, 0);
+
+        // Detiene la bola
+        Rigidbody2D ballRb = ballTransform.GetComponent<Rigidbody2D>();
+        if (ballRb != null)
+        {
+            ballRb.velocity = Vector2.zero;
+        }
+
+        // Llama a Launch después de un retraso de 1 segundo
+        Invoke(nameof(LaunchBall), 1f);
+    }
+
+    private void LaunchBall()
+    {
+        Ball ballScript = ballTransform.GetComponent<Ball>();
+        if (ballScript != null)
+        {
+            ballScript.Launch();
+        }
     }
 
     internal bool IsballInArea1()
