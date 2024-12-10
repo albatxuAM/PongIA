@@ -1,7 +1,22 @@
 
+
 # PongIA
 
 PongIA es una versión del clásico juego Pong con inteligencia artificial y un sistema de control avanzado para la velocidad de la bola.
+
+# Índice
+
+- [1. Aceleración](#1-aceleración)
+  - [Descripción](#descripción)
+  - [Cómo funciona](#cómo-funciona)
+  - [Comportamiento de cada tipo de movimiento](#comportamiento-de-cada-tipo-de-movimiento)
+  - [Modificaciones](#modificaciones)
+- [2. Máquina de Estados](#2-máquina-de-estados)
+  - [Estados de la Bola](#estados-de-la-bola)
+  - [Código de control de los estados de la bola](#código-de-control-de-los-estados-de-la-bola)
+
+
+# 1. Aceleración
 
 ## Descripción
 
@@ -61,3 +76,32 @@ En el script Ball.cs, el tipo de movimiento se selecciona mediante el enum Movem
 
 ##  Modificaciones
 Puedes modificar el tipo de movimiento de la bola desde el Inspector de Unity, seleccionando el tipo de movimiento deseado (Basic, Linear o Exponential). Ajusta el valor de initialVelocity para cambiar la velocidad inicial de la bola, y velocityMultiplier para controlar la rapidez del aumento de la velocidad en los modos Lineal y Exponencial.
+
+# 2. Máquina de estados
+
+## Estados de la Bola
+La bola en PongIA tiene dos estados principales que determinan su comportamiento: Idle (Inactivo) y Moving (En Movimiento). Esto se controla a través del método Update() en el script de la bola. Dependiendo de la zona en la que se encuentre la bola, se decide si se mueve hacia el centro o persigue su trayectoria.
+
+**Idle (Inactivo):** Este es el estado en el que la bola está en reposo o en una zona específica del campo de juego. En este estado, la bola no se mueve hasta que es necesario.
+
+**Moving (En Movimiento):** Cuando la bola se encuentra en la zona activa (determinada por la función IsballInArea1()), la bola comienza a moverse, siguiendo la lógica de control de velocidad correspondiente a su tipo de movimiento (Básico, Lineal o Exponencial).
+
+### Código de control de los estados de la bola
+En el script Ball.cs, el método Update() se encarga de verificar si la bola está en el área 1 (zona activa) o en el área 2 (zona inactiva). Dependiendo de esto, la bola persigue su trayectoria o se mueve hacia el centro:
+
+    void Update()
+    {
+        if (GameManager.Instance.IsballInArea1())
+        {
+            ChaseBall();  // Persigue la trayectoria de la bola
+        }
+        else
+        {
+            MoveToCenter();  // Mueve la bola hacia el centro
+        }
+    }
+
+*ChaseBall():* Hace que la bola persiga su trayectoria según la lógica del tipo de movimiento elegido (Básico, Lineal o Exponencial).
+*MoveToCenter():* Si la bola no está en la zona activa, se mueve de vuelta al centro de la pantalla.
+
+Este sistema permite tener una mayor flexibilidad en el comportamiento de la bola, adaptándose a las necesidades del juego mientras cambia entre los diferentes tipos de movimiento.
