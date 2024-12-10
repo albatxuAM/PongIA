@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     internal bool IsballInArea1()
     {
+        MiddleCrossed();
         return isballInArea1;
     }
 
@@ -60,6 +61,8 @@ public class GameManager : MonoBehaviour
 
     internal void MiddleCrossed()
     {
-        setIsballInArea1(!isballInArea1);
+        //setIsballInArea1(!isballInArea1);
+        // Comprueba en qué área está la bola según su posición en el eje X
+        isballInArea1 = ballTransform.position.x > 0;
     }
 }

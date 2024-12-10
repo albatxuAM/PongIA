@@ -14,11 +14,11 @@ public class PaddleIA : MonoBehaviour
         if (GameManager.Instance.IsballInArea1())
         {
             ChaseBall();
-            Debug.Log("en area 1");
+            //Debug.Log("en area 1");
         }
         else
         {
-            Debug.Log("en area 2");
+            //Debug.Log("en area 2");
             MoveToCenter();
         }
     }
